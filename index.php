@@ -19,8 +19,8 @@ function __autoload($class_name) {
 $closure = function($n) {
 	$np=0;
 	for ($i=0; $i<=$n; $i++){
-		$x=rand()-1;
-		$y=rand()-1;
+		$x=rand(1,99)/100-1;
+		$y=rand(1,99)/100-1;
 		var_dump($x+''+$y);
 		if((pow($x,2)+pow($y,2))<=1) {
 			$np++;
