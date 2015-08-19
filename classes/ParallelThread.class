@@ -9,17 +9,20 @@
 * 
 **/
 class ParallelThread extends Thread {
+
+	public function microtime_float()
+	{
+		list($usec, $sec) = explode(" ", microtime());
+		return ((float)$usec + (float)$sec);
+	}
+	
     private function __construct(Closure $closure, array $args = []) {
         $this->closure = $closure;
         $this->args    = $args;
 		$this->time_start = microtime_float();
 		
     }
-	public function microtime_float()
-	{
-		list($usec, $sec) = explode(" ", microtime());
-		return ((float)$usec + (float)$sec);
-	}
+	
 	
     public function run() {
         $closure = $this->closure;
