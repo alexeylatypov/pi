@@ -26,7 +26,7 @@ class ParallelThread extends Thread {
         return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
-			array_push($this->outresult['duration'], time() - $this->$time_start);
+			array_push($this->outresult['duration'], $this->$time_start);
 			array_push($this->outresult['result'], $this->$result);
 
             return $this->outresult;
