@@ -19,8 +19,8 @@ function __autoload($class_name) {
 $closure = function($n) {
 	$np=0;
 	for ($i=0; $i<=$n; $i++){
-		$x=rand(1,99999)/100000*2-1;
-		$y=rand(1,99999)/100000*2-1;
+		$x=rand(1,999999999)/1000000000*2-1;
+		$y=rand(1,999999999)/1000000000*2-1;
 		//var_dump($x+''+$y);
 		if((pow($x,2)+pow($y,2))<=1) {
 			$np++;
@@ -32,7 +32,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [100000];
+$argv = [10000000];
 $getpi = ParallelThread::add($closure, $argv );
 /* get result of background and foreground call */
 var_dump($getpi->getResult());
