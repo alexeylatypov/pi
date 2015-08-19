@@ -1,7 +1,7 @@
 <?php
 
 function __autoload($class_name) {
-  if (file_exists('classes/'.$className . '.class')) { 
+  if (file_exists('classes/'.$class_name . '.class')) { 
   require_once 'classes/'.$class_name . '.class';
           return true; 
       } 
