@@ -32,7 +32,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [999999];
+$argv = [1000000];
 
 $time_start = microtime(true);
 $np_result =0;
@@ -50,7 +50,7 @@ foreach (range(0, 10) as $i) {
 	$tmp_res = json_decode($workers[$i]->getResult(), true);
 	$np_result = $np_result + $tmp_res['results'];
 }
-$pi = 4 * $np_result / 9999999;
+$pi = 4 * $np_result / 10000000;
 echo $pi."<br>";
 echo microtime(true) - $time_start;
 
