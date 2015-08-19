@@ -38,7 +38,7 @@ $argv = [1000000];
 // Initialize and start the threads
 foreach (range(0, 10) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv );
-
+	$workers[$i]->start();
 }
  
 // Let the threads come back
