@@ -12,7 +12,7 @@ class ParallelThread extends Thread {
     private function __construct(Closure $closure, array $args = []) {
         $this->closure = $closure;
         $this->args    = $args;
-		$this->time_start = time();
+		$this->time_start = microtime_float();
 		
     }
     public function run() {
@@ -27,7 +27,7 @@ class ParallelThread extends Thread {
             while (!$this->result)
                 $this->wait();
 			$outresult=array();
-			array_push($outresult, time()-$this->time_start);
+			array_push($outresult, microtime_float()-$this->time_start);
 			array_push($outresult, $this->result);
 			
             return $outresult;
@@ -41,6 +41,11 @@ class ParallelThread extends Thread {
         return $resultTread;
     }
     
+	private function microtime_float()
+	{
+		list($usec, $sec) = explode(" ", microtime());
+		return ((float)$usec + (float)$sec);
+	}
     protected $closure;
     protected $args;
 	protected $result;
