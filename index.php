@@ -57,7 +57,7 @@ $thread->start();
 /*
 * You can see that this call is blocked until the threading context returns from the method
 */
-printf("Process: %s\n", $thread->exclusive());
+printf("Process: %s\n\r", $thread->exclusive());
 /*
 * Passing an argument on the command line will show you what happens when you call a private method from here
 */
