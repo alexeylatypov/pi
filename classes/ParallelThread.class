@@ -14,6 +14,7 @@ class ParallelThread extends Thread {
         $this->args    = $args;
 		$this->time_start = time();
 		$this->duration = 0;
+		$this->$out_result = array( 'result' => 0, 'duration' => 0);
     }
     public function run() {
         $closure = $this->closure;
@@ -43,7 +44,7 @@ class ParallelThread extends Thread {
     protected $closure;
     protected $args;
 	protected $result;
-    protected $out_result = array( 'result' => 0, 'duration' => 0);
+    protected $out_result;
 	protected $time_start;
 	protected $duration;
 
