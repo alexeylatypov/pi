@@ -18,16 +18,18 @@ class ParallelThread extends Thread {
     public function run() {
         $closure = $this->closure;
         $this->synchronized(function() use($closure) {
-            array_push($this->result['result'], $closure(...$this->args));
+            $this->result = $closure(...$this->args);
             $this->notify();
         });
     }
     public function getResult() {
         return $this->synchronized(function(){
-            while (!$this->result['result'])
+            while (!$this->result)
                 $this->wait();
-			array_push($this->result['duration'], time() - $time_start);
-            return $this->result;
+			array_push($this->out_result['duration'], time() - $time_start);
+			array_push($this->out_result['result'], $result);
+
+            return $this->out_result;
         });
     }
     
@@ -40,9 +42,10 @@ class ParallelThread extends Thread {
     
     protected $closure;
     protected $args;
-    protected $result = array( 'result' => 0, 'duration' => 0);
+	protected $result;
+    protected $out_result = array( 'result' => 0, 'duration' => 0);
 	protected $time_start;
-	public $duration;
+	protected $duration;
 
 }
 
