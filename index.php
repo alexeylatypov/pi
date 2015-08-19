@@ -1,5 +1,10 @@
 <?php
-require_once("classes/ParallelThread.class");
+
+function __autoload($class_name) {
+  require_once $class_name . '.php';
+}
+
+
 $test = ["Hello", "World"];
 $closure = function($test) {
     return $test;
