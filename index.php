@@ -37,7 +37,7 @@ $argv = [999999];
 $time_start = microtime(true);
 $np_result =0;
 // Initialize and start the threads
-foreach (range(0, 0) as $i) {
+foreach (range(0, 10) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv );
 	$workers[$i]->start();
 }
@@ -48,7 +48,7 @@ foreach (range(0, 10) as $i) {
 	var_dump($workers[$i]->getResult());
 	echo "<br>";
 	$tmp_res = json_decode($workers[$i]->getResult(), true);
-	$np_result = $np_result + $tmp_res['result'];
+	$np_result = $np_result + $tmp_res['results'];
 }
 $pi = 4 * $np_result / 9999999;
 echo $pi."<br>";
