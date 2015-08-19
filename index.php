@@ -1,66 +1,53 @@
 <?php
-/*
-* Method Scope 101
+/**
+* NOTE: THIS IS A 5.6 EXAMPLE ONLY
 *
-* protected:
-*	A protected method may only be called by one thread at a time
-*	If Thread A is calling a protected method and Thread B attempts to call the same method Thread B will block until Thread A has left the method
+* This is just scrap code, but rather cool scrap code!
 *
-* private:
-*	private with respect to the scope of the Thread, ie: you can only call private methods from within the threading context
-*/
-class ExampleThread extends Thread {
-	private $mine = "mine";
-	
-	/*
-	* This private method can only be called within the threading context
-	*/
-	private function noaccess(){
-		return sprintf("%lu: ran %s\n", $this->getThreadId(), __METHOD__);
-	}
-	
-	/*
-	* This protected method can only be called by one thread at a time
-	*/
-	protected function exclusive($arg = null){
-		printf("IN->%s: %s\n", __METHOD__, microtime(true));
-		if ($arg)
-			$result = sprintf("%s: got \"%s\"", __METHOD__, $arg);
-		else $result = sprintf("%s: got nothing", __METHOD__);
-		printf("%s: %s\n\r", __METHOD__, microtime(true));
-		usleep(1000000);
-		printf("OUT->%s: %s\n\r", __METHOD__, microtime(true));
-		return $result;
-	}
-	
-	/*
-	* Nothing special from here on in ...
-	*/
-	public function __construct($data){
-		$this->data = $data;
-		$this->mine = strrev($this->data);
-	}
-	
-	public function run(){
-		printf("IN->%s: %s\n\r", __METHOD__, microtime(true));
-		printf("%s: %s\n\r", __METHOD__, $this->exclusive(strrev($this->data)));
-		printf("%s: %s\n\r", __METHOD__, microtime(true));
-		printf("%s: %s\n\r", __METHOD__, $this->noaccess());
-		printf("OUT->%s: %s\n\r", __METHOD__, microtime(true));
-	}
+* Notes:
+*   Lexcial vars and threads do not mix, do not try, rather use this kind of abstraction or Threaded::from
+*       to create thread safe objects.
+*
+* That's all I've got to say about that ...
+**/
+class Future extends Thread {
+    private function __construct(Closure $closure, array $args = []) {
+        $this->closure = $closure;
+        $this->args    = $args;
+    }
+    public function run() {
+        $closure = $this->closure;
+        $this->synchronized(function() use($closure) {
+            $this->result = 
+                $closure(...$this->args);
+            $this->notify();
+        });
+    }
+    public function getResult() {
+        return $this->synchronized(function(){
+            while (!$this->result)
+                $this->wait();
+            return $this->result;
+        });
+    }
+    
+    public static function of(Closure $closure, array $args = []) {
+        $future = 
+            new self($closure, $args);
+        $future->start();
+        return $future;
+    }
+    
+    protected $closure;
+    protected $args;
+    protected $result;
 }
-/*
-* This comment is not in use.
-*/
-$thread = new ExampleThread(rand()*10);
-$thread->start();
-/*
-* You can see that this call is blocked until the threading context returns from the method
-*/
-printf("Process: %s\n\r", $thread->exclusive());
-/*
-* Passing an argument on the command line will show you what happens when you call a private method from here
-*/
-if ($argv[1])
-	printf("Process: %s\n", $thread->noaccess());
+$test = ["Hello", "World"];
+$closure = function($test) {
+    return $test;
+};
+/* make call in background thread */
+$future = Future::of($closure, [$test]);
+/* get result of background and foreground call */
+var_dump($future->getResult(), $closure($test));
 ?>
