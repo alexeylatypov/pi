@@ -12,7 +12,7 @@ class ParallelThread extends Thread {
 
 	
 	
-    private function __construct(Closure $closure, array $args = []) {
+    public function __construct(Closure $closure, array $args = []) {
         $this->closure = $closure;
         $this->args    = $args;
 		$this->time_start = microtime(true);
