@@ -49,7 +49,7 @@ foreach (range(0, 0) as $i) {
 	echo "<br>";
 	$np_result = $np_result + $workers[$i]->getResult()['result'];
 }
-$pi = 4 * $np_result / $n;
+$pi = 4 * $np_result / 9999999;
 echo $pi."<br>";
 echo microtime(true) - $time_start;
 
