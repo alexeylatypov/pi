@@ -21,7 +21,7 @@ $closure = function($n) {
 	for ($i=0; $i<=$n; $i++){
 		$x=2*rand()-1;
 		$y=2*rand()-1;
-		var_dump($x+''+$y)
+		var_dump($x+''+$y);
 		if((pow($x,2)+pow($y,2))<=1) {
 			$np++;
 		}
