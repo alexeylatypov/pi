@@ -26,8 +26,8 @@ $closure = function($n) {
 			$np++;
 		}
 	}
-	$pi = 4 * $np / $n;
-    return $pi;
+	
+    return $np;
 };
 
 
@@ -35,7 +35,7 @@ $closure = function($n) {
 $argv = [9999999];
 
 $time_start = microtime(true);
-
+$np_result =0;
 // Initialize and start the threads
 foreach (range(0, 0) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv );
@@ -46,8 +46,11 @@ foreach (range(0, 0) as $i) {
 foreach (range(0, 0) as $i) {
     $workers[$i]->join();
 	var_dump($workers[$i]->getResult());
-		echo "<br>";
+	echo "<br>";
+	$np_result = $np_result + $workers[$i]->getResult()['result'];
 }
+$pi = 4 * $np_result / $n;
+echo $pi."<br>";
 echo microtime(true) - $time_start;
 
 ?>
