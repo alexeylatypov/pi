@@ -27,9 +27,9 @@ class ExampleThread extends Thread {
 		if ($arg)
 			$result = sprintf("%s: got \"%s\"", __METHOD__, $arg);
 		else $result = sprintf("%s: got nothing", __METHOD__);
-		printf("%s: %s\n", __METHOD__, microtime(true));
+		printf("%s: %s\n\r", __METHOD__, microtime(true));
 		usleep(1000000);
-		printf("OUT->%s: %s\n", __METHOD__, microtime(true));
+		printf("OUT->%s: %s\n\r", __METHOD__, microtime(true));
 		return $result;
 	}
 	
@@ -42,11 +42,11 @@ class ExampleThread extends Thread {
 	}
 	
 	public function run(){
-		printf("IN->%s: %s\n", __METHOD__, microtime(true));
-		printf("%s: %s\n", __METHOD__, $this->exclusive(strrev($this->data)));
-		printf("%s: %s\n", __METHOD__, microtime(true));
-		printf("%s: %s\n", __METHOD__, $this->noaccess());
-		printf("OUT->%s: %s\n", __METHOD__, microtime(true));
+		printf("IN->%s: %s\n\r", __METHOD__, microtime(true));
+		printf("%s: %s\n\r", __METHOD__, $this->exclusive(strrev($this->data)));
+		printf("%s: %s\n\r", __METHOD__, microtime(true));
+		printf("%s: %s\n\r", __METHOD__, $this->noaccess());
+		printf("OUT->%s: %s\n\r", __METHOD__, microtime(true));
 	}
 }
 /*
