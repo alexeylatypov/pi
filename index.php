@@ -34,6 +34,7 @@ $closure = function($n) {
 /* make call in background thread */
 $argv = [1000000];
 
+$time_start = microtime(true);
 
 // Initialize and start the threads
 foreach (range(0, 10) as $i) {
@@ -47,6 +48,6 @@ foreach (range(0, 10) as $i) {
 	var_dump($workers[$i]->getResult());
 		echo "<br>";
 }
-
+echo microtime(true) - $time_start;
 
 ?>
