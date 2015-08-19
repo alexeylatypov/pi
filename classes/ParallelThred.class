@@ -1,0 +1,43 @@
+<?php
+/**
+* NOTE: Parallel Thread class
+*
+* Get and run function in background
+*
+* Notes:
+*
+* 
+**/
+class ParallelThread extends Thread {
+    private function __construct(Closure $closure, array $args = []) {
+        $this->closure = $closure;
+        $this->args    = $args;
+    }
+    public function run() {
+        $closure = $this->closure;
+        $this->synchronized(function() use($closure) {
+            $this->result = $closure(...$this->args);
+            $this->notify();
+        });
+    }
+    public function getResult() {
+        return $this->synchronized(function(){
+            while (!$this->result)
+                $this->wait();
+            return $this->result;
+        });
+    }
+    
+    public static function add(Closure $closure, array $args = []) {
+        $resultTread = 
+            new self($closure, $args);
+        $resultTread->start();
+        return $resultTread;
+    }
+    
+    protected $closure;
+    protected $args;
+    protected $result;
+}
+
+?>
