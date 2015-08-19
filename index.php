@@ -47,7 +47,8 @@ foreach (range(0, 0) as $i) {
     $workers[$i]->join();
 	var_dump($workers[$i]->getResult());
 	echo "<br>";
-	$np_result = $np_result + $workers[$i]->getResult()['result'];
+	$tmp_res = json_decode($workers[$i]->getResult());
+	$np_result = $np_result + $tmp_res['result'];
 }
 $pi = 4 * $np_result / 9999999;
 echo $pi."<br>";
