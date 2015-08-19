@@ -26,9 +26,9 @@ class ParallelThread extends Thread {
         return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
-			array_push($this->outresult, $this->time_start);
-			array_push($this->outresult, $this->result);
-
+			array_push($this->outresult, 1);
+			array_push($this->outresult, 2);
+			
             return $this->outresult;
         });
     }
@@ -48,5 +48,6 @@ class ParallelThread extends Thread {
 	protected $time_start;
 
 }
+
 
 ?>
