@@ -15,6 +15,12 @@ class ParallelThread extends Thread {
 		$this->time_start = microtime_float();
 		
     }
+	public function microtime_float()
+	{
+		list($usec, $sec) = explode(" ", microtime());
+		return ((float)$usec + (float)$sec);
+	}
+	
     public function run() {
         $closure = $this->closure;
         $this->synchronized(function() use($closure) {
@@ -41,11 +47,7 @@ class ParallelThread extends Thread {
         return $resultTread;
     }
     
-	private function microtime_float()
-	{
-		list($usec, $sec) = explode(" ", microtime());
-		return ((float)$usec + (float)$sec);
-	}
+	
     protected $closure;
     protected $args;
 	protected $result;
