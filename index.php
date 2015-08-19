@@ -14,7 +14,7 @@ $closure = function($test) {
     return $test;
 };
 /* make call in background thread */
-$future = ParallelThread::of($closure, [$test]);
+$future = ParallelThread::add($closure, [$test]);
 /* get result of background and foreground call */
 var_dump($future->getResult(), $closure($test));
 
