@@ -34,7 +34,7 @@ class ParallelThread extends Thread {
                 $this->wait();
 			$outresult=array( 'result' => 0.0, 'duration' => 0.0);
 			array_push($outresult['duration], microtime(true)-$this->time_start);
-			array_push($outresult['result'] $this->result);
+			array_push($outresult['result'], $this->result);
 			
             return $outresult;
         });
