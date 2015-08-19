@@ -45,6 +45,7 @@ foreach (range(0, 10) as $i) {
 foreach (range(0, 10) as $i) {
     $workers[$i]->join();
 	var_dump($workers[$i]->getResult());
+		echo "<br>";
 }
 
 
