@@ -14,7 +14,7 @@ class ParallelThread extends Thread {
         $this->args    = $args;
 		$this->time_start = time();
 		$this->duration = 0;
-		$this->result = array();
+		$this->result = array( 'result' => 0, 'duration' => 0);
 //		$this->$out_result = array( 'result' => 0, 'duration' => 0);
     }
     public function run() {
