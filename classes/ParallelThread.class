@@ -18,7 +18,7 @@ class ParallelThread extends Thread {
     public function run() {
         $closure = $this->closure;
         $this->synchronized(function() use($closure) {
-            array_push($this->result['result'], $closure(...$this->args);
+            array_push($this->result['result'], $closure(...$this->args));
             $this->notify();
         });
     }
