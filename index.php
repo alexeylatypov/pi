@@ -50,7 +50,7 @@ foreach (range(0, 10) as $i) {
 	$tmp_res = json_decode($workers[$i]->getResult(), true);
 	$np_result = $np_result + $tmp_res['results'];
 }
-$pi = 4 * $np_result / ($argv*11);
+$pi = 4 * $np_result / ($argv[0]*11);
 echo $np_result."<br>";
 echo $pi."<br>";
 echo microtime(true) - $time_start;
