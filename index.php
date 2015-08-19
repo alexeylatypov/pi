@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-<?php
+
 class AsyncOperation extends Thread {
   public function __construct($arg){
     $this->arg = $arg;
@@ -15,7 +15,7 @@ class AsyncOperation extends Thread {
 $thread = new AsyncOperation("World");
 if($thread->start())
   $thread->join();
-?>
+
 phpinfo();
 
 ?>
