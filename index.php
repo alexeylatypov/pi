@@ -33,11 +33,19 @@ $closure = function($n) {
 
 /* make call in background thread */
 $argv = [1000000];
-for($i=0;$i<=10;$i++){
-	$getpi = ParallelThread::add($closure, $argv );
-/* get result of background and foreground call */
-	var_dump($getpi->getResult());
-	echo "<br>";
+
+
+// Initialize and start the threads
+foreach (range(0, 10) as $i) {
+    $workers[$i] = new ParallelThread::add($closure, $argv );
+
 }
+ 
+// Let the threads come back
+foreach (range(0, 10) as $i) {
+    $workers[$i]->join();
+	var_dump($workers[$i]->getResult());
+}
+
 
 ?>
