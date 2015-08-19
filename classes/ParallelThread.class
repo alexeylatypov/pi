@@ -32,9 +32,9 @@ class ParallelThread extends Thread {
         return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
-			$outresult=array();
-			array_push($outresult, microtime(true)-$this->time_start);
-			array_push($outresult, $this->result);
+			$outresult=array( 'result' => 0.0, 'duration' => 0.0);
+			array_push($outresult['duration], microtime(true)-$this->time_start);
+			array_push($outresult['result'] $this->result);
 			
             return $outresult;
         });
