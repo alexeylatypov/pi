@@ -31,7 +31,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [100000];
+$argv = [1000000];
 $getpi = ParallelThread::add($closure, $argv );
 /* get result of background and foreground call */
 var_dump($getpi->getResult());
