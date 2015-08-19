@@ -13,7 +13,7 @@ class ParallelThread extends Thread {
         $this->closure = $closure;
         $this->args    = $args;
 		$this->time_start = time();
-		$this->outresult = array( 'result' => 0, 'duration' => 0);
+		$this->outresult = array();
     }
     public function run() {
         $closure = $this->closure;
@@ -26,8 +26,8 @@ class ParallelThread extends Thread {
         return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
-			array_push($this->outresult['duration'], $this->time_start);
-			array_push($this->outresult['result'], $this->result);
+			array_push($this->outresult, $this->time_start);
+			array_push($this->outresult, $this->result);
 
             return $this->outresult;
         });
