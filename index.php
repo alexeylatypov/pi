@@ -37,6 +37,7 @@ for($i=0;$i<=10;$i++){
 	$getpi = ParallelThread::add($closure, $argv );
 /* get result of background and foreground call */
 	var_dump($getpi->getResult());
+	echo "<br>";
 }
 
 ?>
