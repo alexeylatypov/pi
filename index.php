@@ -32,25 +32,25 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [10000000];
+$argv = [1000000];
 
 $time_start = microtime(true);
 $np_result =0;
 // Initialize and start the threads
-foreach (range(0, 0) as $i) {
+foreach (range(0, 10) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv );
 	$workers[$i]->start();
 }
  
 // Let the threads come back
-foreach (range(0, 0) as $i) {
+foreach (range(0, 10) as $i) {
     $workers[$i]->join();
 	var_dump($workers[$i]->getResult());
 	echo "<br>";
 	$tmp_res = json_decode($workers[$i]->getResult(), true);
 	$np_result = $np_result + $tmp_res['results'];
 }
-$pi = 4 * $np_result / ($argv[0]*10);
+$pi = 4 * $np_result / ($argv[0]*11);
 echo $np_result."<br>";
 echo $pi."<br>";
 echo microtime(true) - $time_start;
