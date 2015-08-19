@@ -9,6 +9,12 @@ function __autoload($class_name) {
 }
 
 
+/* 
+* Get 'pi' by MonteCarlo method.
+* $n parameters - iteration count (integer)
+*
+*
+*/
 
 $closure = function($n) {
 	$np=0;
@@ -22,8 +28,10 @@ $closure = function($n) {
 	$pi = 4 * $np / $n;
     return $pi;
 };
+
+
 /* make call in background thread */
-$argv = [100];
+$argv = [10000];
 $getpi = ParallelThread::add($closure, $argv );
 /* get result of background and foreground call */
 var_dump($getpi->getResult());
