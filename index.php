@@ -10,7 +10,7 @@ function __autoload($class_name) {
 
 
 
-$closure = function MonteCarlo($n) {
+$closure = function($n) {
 	$np=0;
 	for ($i=0; $i<=$n; $++){
 		$x=mt_rand(0,1)-1;
