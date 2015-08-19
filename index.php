@@ -32,18 +32,18 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [10000000];
+$argv = [100000];
 
 $time_start = microtime(true);
 
 // Initialize and start the threads
-foreach (range(0, 1) as $i) {
+foreach (range(0, 100) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv );
 	$workers[$i]->start();
 }
  
 // Let the threads come back
-foreach (range(0, 1) as $i) {
+foreach (range(0, 100) as $i) {
     $workers[$i]->join();
 	var_dump($workers[$i]->getResult());
 		echo "<br>";
