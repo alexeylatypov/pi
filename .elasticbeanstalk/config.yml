@@ -1,9 +1,9 @@
 branch-defaults:
   master:
-    environment: pi-env
+    environment: pitests-env
 global:
-  application_name: pi
-  default_ec2_keyname: null
+  application_name: pitests
+  default_ec2_keyname: aws-eb
   default_platform: PHP 5.6
   default_region: us-west-2
   profile: eb-cli
