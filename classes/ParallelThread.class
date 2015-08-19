@@ -41,6 +41,7 @@ class ParallelThread extends Thread {
         $resultTread = 
             new self($closure, $args);
         $resultTread->start();
+		$resultTread->join();
         return $resultTread;
     }
     
