@@ -32,7 +32,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [9999999];
+$argv = [999999];
 
 $time_start = microtime(true);
 $np_result =0;
@@ -43,7 +43,7 @@ foreach (range(0, 0) as $i) {
 }
  
 // Let the threads come back
-foreach (range(0, 0) as $i) {
+foreach (range(0, 10) as $i) {
     $workers[$i]->join();
 	var_dump($workers[$i]->getResult());
 	echo "<br>";
