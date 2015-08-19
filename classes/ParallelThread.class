@@ -32,10 +32,8 @@ class ParallelThread extends Thread {
         return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
-			$outresult=array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result);
 
-			
-            return $outresult;
+            return json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result));
         });
     }
     
@@ -50,8 +48,6 @@ class ParallelThread extends Thread {
     protected $closure;
     protected $args;
 	protected $result;
-	
-
 	protected $time_start;
 
 }
