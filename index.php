@@ -40,7 +40,7 @@ $np_result =0;
 foreach (range(0, 10) as $i) {
     $workers[$i] = ParallelThread::add($closure, $argv );
 	//$workers[$i]->start();
-	tmp_res = json_decode($workers[$i]->getResult(), true);
+	$tmp_res = json_decode($workers[$i]->getResult(), true);
 	$np_result = $np_result + $tmp_res['results'];
 }
  
