@@ -16,7 +16,17 @@ if (is_resource($process)) {
     // 1 => читающий обработчик, подключенный к дочернему stdout
     // Вывод сообщений об ошибках будет добавляться в /tmp/error-output.txt
 
-	$testscript = '<?php $st=function(){ return lcg_value()*2;}; ?>';
+	$testscript = '<?php
+	for ($i=0; $i<=10; $i++){
+		$x=lcg_value()*2-1;
+		$y=lcg_value()*2-1;
+		//var_dump($x+''+$y);
+		if(($x**2+$y**2)<=1) {
+			$np++;
+		}
+	}
+	echo $np;
+	?>';
     fwrite($pipes[0], $testscript);
     fclose($pipes[0]);
 
