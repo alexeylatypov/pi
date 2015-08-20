@@ -66,7 +66,6 @@ $p->collect(function($checkingTask){
 	$tmp_res = json_decode($checkingTask->result, true);
   return $checkingTask->$tmp_res;
 });
-var_dump($p);
 
 $pi = 4 * $np_result / (10*100);
 echo "PI = ".$pi."<br>";
