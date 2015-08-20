@@ -38,11 +38,12 @@ $time_start = microtime(true);
 $np_result =0;
 // Initialize and start the threads
 foreach (range(0, 10) as $i) {
-    $workers[$i] = new ParallelThread($closure, $argv );
+    $workers[$i] = ParallelThread::add($closure, $argv );
 	$workers[$i]->start();
+	var_dump()$workers[$i]->join());
 }
  
-// Let the threads come back
+/* Let the threads come back
 foreach (range(0, 10) as $i) {
 	echo "Thread #".$i." ";
 	echo "<br>";
@@ -51,7 +52,7 @@ foreach (range(0, 10) as $i) {
 }
 $pi = 4 * $np_result / ($argv[0]*11);
 echo $np_result."<br>";
-echo $pi."<br>";
+echo $pi."<br>";*/
 echo microtime(true) - $time_start;
 
 ?>
