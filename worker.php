@@ -12,10 +12,10 @@ class job extends Collectable {
   }
   public function run(){
     // do some work
-     $closure = $this->closure;
-  //      $this->synchronized(function() use($closure) {
-            $this->result = $closure($this->val);
-  //     });
+     $newjob = $this->newjob;
+        $this->synchronized(function() use($newjob) {
+            $this->result = $newjob($this->val);
+       });
   }
   
   protected $newjob;
