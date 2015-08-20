@@ -61,7 +61,7 @@ $p->shutdown();
 // garbage collection check / read results
 $np_result=0;
 
-$p->collect($np_result - $np_result + function($checkingTask){
+$p->collect(function($checkingTask){
 	$np_result=0;
 	echo $checkingTask->result."<BR>";
 	$tmp_res = json_decode($checkingTask->result, true);
@@ -70,7 +70,7 @@ $p->collect($np_result - $np_result + function($checkingTask){
 
   return $checkingTask->$tmp_res['results'];
 });
-var_dump($np_result);
+var_dump($p);
 
 $pi = 4 * $np_result / (10*100);
 echo "PI = ".$pi."<br>";
