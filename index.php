@@ -15,6 +15,8 @@ function __autoload($class_name) {
 *
 *
 */
+$threads = 10;
+$interation = 100000;
 
 $closure = function($n) {
 	$np=0;
@@ -32,7 +34,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [10000];
+$argv = [$interation];
 
 $time_start = microtime(true);
 $np_result =0;
@@ -40,24 +42,22 @@ $np_result =0;
 
 $my = new Worker();
 
-foreach (range(0, 10) as $i) {
+foreach (range(0, $threads) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv);
 	$my->stack($workers[$i]);
-	//$workers[$i]->start();
-//	$tmp_res = json_decode($workers[$i]->getResult(), true);
-//	$np_result = $np_result + $tmp_res['results'];
+
 }
  $my->start();
  
  $my->shutdown();
-foreach (range(0, 10) as $i) {
-	echo $workers[$i]->result."<BR>"; 
+foreach (range(0, $threads) as $i) {
+//	echo $workers[$i]->result."<BR>"; 
 	$np_result = $np_result + $workers[$i]->result;
 }
 
 
-$pi = 4 * $np_result / ($argv[0]*11);
-echo $np_result."<br>";
+$pi = 4 * $np_result / ($argv[0]*($threads+1));
+//echo $np_result."<br>";
 echo $pi."<br>";
 echo microtime(true) - $time_start;
 
