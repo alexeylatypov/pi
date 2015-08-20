@@ -44,6 +44,7 @@ foreach (range(0, 10) as $i) {
  
 // Let the threads come back
 foreach (range(0, 10) as $i) {
+	echo "Thread #".$i." ";
 	var_dump($workers[$i]->getResult());
 	echo "<br>";
 	$tmp_res = json_decode($workers[$i]->getResult(), true);
