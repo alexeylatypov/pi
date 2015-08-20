@@ -17,7 +17,7 @@ class my extends Thread {
             $this->storage[]=rand(0,1000);
 		
         }
-echo $this->getCurrentThread()."<BR>"; 
+echo $this->getCurrentThreadId()."<BR>"; 
         $this->synchronized(function($thread){
             $thread->notify();
         }, $this);
