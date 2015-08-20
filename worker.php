@@ -67,7 +67,7 @@ $p->collect($testnp = function($checkingTask){
 	$np_result = $np_result + $tmp_res['results'];
 	echo $np_result."<BR>";
 
-  return $checkingTask->result;
+  return $checkingTask->$tmp_res;
 });
 var_dump($testnp);
 
