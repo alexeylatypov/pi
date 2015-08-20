@@ -15,6 +15,7 @@ class my extends Thread {
         $i = 0;
         while(++$i < 10) {
             $this->storage[]=rand(0,1000);
+
 		
         }
 echo $this->getCurrentThreadId()."<BR>"; 
