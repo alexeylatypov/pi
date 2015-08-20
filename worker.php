@@ -16,7 +16,7 @@ if (is_resource($process)) {
     // 1 => читающий обработчик, подключенный к дочернему stdout
     // Вывод сообщений об ошибках будет добавляться в /tmp/error-output.txt
 
-	$testscript = '<?php $st=function(){ return rand();} ?>';
+	$testscript = '<?php $st=function(){ return lcg_value()*2;}; ?>';
     fwrite($pipes[0], $testscript);
     fclose($pipes[0]);
 
