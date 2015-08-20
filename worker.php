@@ -14,7 +14,7 @@ class job extends Collectable {
     // do some work
      $closure = $this->closure;
         $this->synchronized(function() use($closure) {
-            $this->result = $closure(...$this->val);
+            $this->result = $closure($this->val);
        });
   }
   
