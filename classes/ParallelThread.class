@@ -23,20 +23,13 @@ class ParallelThread extends Threaded {
 	
     public function run() {
         $closure = $this->closure;
- //       $this->synchronized(function() use($closure) {
+        $this->synchronized(function() use($closure) {
             $this->result = $closure(...$this->args);
 			echo json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result, 'start_time' => $this->time_start))."<BR>";
             $this->notify();
- //      });
-    }
-    public function getResult() {
-        return $this->synchronized(function(){
-            while (!$this->result)
-                $this->wait();
-			echo json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result, 'threadId' =>$this->getThreadId(), 'start_time' => $this->time_start))."<BR>";
-			return json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result, 'threadId' =>$this->getThreadId(), 'start_time' => $this->time_start));
        });
     }
+
     
 
 	
