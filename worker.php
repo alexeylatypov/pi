@@ -23,7 +23,7 @@ class job extends Collectable {
 }
 
 // At most 3 threads will work at once
-$p = new Pool(3);
+
 $time_start = microtime(true);
 $closure = function($n) {
 	$np=0;
@@ -38,23 +38,8 @@ $closure = function($n) {
 	
     return $np;
 };
+$p = new Pool(3,job::class,[$closure,100]);
 
-$tasks = array(
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-	new job($closure,100),
-);
-// Add tasks to pool queue
-foreach ($tasks as $task) {
-  $p->submit($task);
-}
 
 // shutdown will wait for current queue to be completed
 $p->shutdown();
