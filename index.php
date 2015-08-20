@@ -32,7 +32,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [1000000];
+$argv = [10000];
 
 $time_start = microtime(true);
 $np_result =0;
@@ -48,9 +48,9 @@ foreach (range(0, 10) as $i) {
 //	$np_result = $np_result + $tmp_res['results'];
 }
  $my->start();
- var_dump($my->unstack($my));
+ 
  $my->shutdown();
-
+var_dump($workers);
 $pi = 4 * $np_result / ($argv[0]*11);
 echo $np_result."<br>";
 echo $pi."<br>";
