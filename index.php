@@ -40,16 +40,11 @@ $np_result =0;
 foreach (range(0, 10) as $i) {
     $workers[$i] = ParallelThread::add($closure, $argv );
 	//$workers[$i]->start();
-
-}
- 
-// Let the threads come back
-foreach (range(0, 10) as $i) {
-	echo "Thread #".$i." ";
-	echo "<br>";
-	$tmp_res = json_decode($workers[$i]->getResult(), true);
+	tmp_res = json_decode($workers[$i]->getResult(), true);
 	$np_result = $np_result + $tmp_res['results'];
 }
+ 
+
 $pi = 4 * $np_result / ($argv[0]*11);
 echo $np_result."<br>";
 echo $pi."<br>";
