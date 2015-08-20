@@ -40,7 +40,7 @@ $np_result =0;
 foreach (range(0, 10) as $i) {
     $workers[$i] = ParallelThread::add($closure, $argv );
 	$workers[$i]->start();
-	var_dump()$workers[$i]->join());
+	var_dump($workers[$i]->join());
 }
  
 /* Let the threads come back
