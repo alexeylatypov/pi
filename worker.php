@@ -1,6 +1,6 @@
 <?php
 
-class job extends Collectable {
+class job extends Worker  {
   public $val;
   public $result;
 
