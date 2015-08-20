@@ -59,7 +59,9 @@ foreach ($tasks as $task) {
 // shutdown will wait for current queue to be completed
 $p->shutdown();
 // garbage collection check / read results
+$np_result=0;
 $p->collect(function($checkingTask){
+	
 	echo $checkingTask->result."<BR>";
 	$tmp_res = json_decode($checkingTask->result, true);
 	$np_result = $np_result + $tmp_res['results'];
