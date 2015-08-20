@@ -65,12 +65,11 @@ $p->collect(function($checkingTask){
 	echo $checkingTask->result."<BR>";
 	$tmp_res = json_decode($checkingTask->result, true);
 	$np_result = $np_result + $tmp_res['results'];
-  return $checkingTask->result;
+  return $checkingTask->$np_result;
 });
 
 
-$pi = 4 * $np_result / (10*100);
-echo $np_result."<br>";
+$pi = 4 * $p / (10*100);
 echo "PI = ".$pi."<br>";
 echo "Timer is ".microtime(true) - $time_start;
 
