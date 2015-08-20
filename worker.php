@@ -1,7 +1,7 @@
 <?php
 class storage extends Threaded {
     public function run(){
-		echo $this->getCurrentThread()."<BR>"; 
+		
 	}
 }
 
@@ -15,8 +15,9 @@ class my extends Thread {
         $i = 0;
         while(++$i < 10) {
             $this->storage[]=rand(0,1000);
+		
         }
-
+echo $this->getCurrentThread()."<BR>"; 
         $this->synchronized(function($thread){
             $thread->notify();
         }, $this);
