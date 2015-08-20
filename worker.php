@@ -59,8 +59,9 @@ foreach ($tasks as $task) {
 // shutdown will wait for current queue to be completed
 $p->shutdown();
 // garbage collection check / read results
+$np_result=0;
 
-$p->collect(function($checkingTask){
+$p->collect($np_result - $np_result + function($checkingTask){
 	$np_result=0;
 	echo $checkingTask->result."<BR>";
 	$tmp_res = json_decode($checkingTask->result, true);
@@ -69,9 +70,9 @@ $p->collect(function($checkingTask){
 
   return $checkingTask->$tmp_res['results'];
 });
-var_dump($testnp);
+var_dump($np_result);
 
-$pi = 4 * $p / (10*100);
+$pi = 4 * $np_result / (10*100);
 echo "PI = ".$pi."<br>";
 echo "Timer is ".microtime(true) - $time_start;
 
