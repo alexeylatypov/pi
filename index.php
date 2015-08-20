@@ -42,7 +42,7 @@ $np_result =0;
 
 $my = new Worker();
 
-foreach (range(0, $threads) as $i) {
+foreach (range(0, $threads-1) as $i) {
     $workers[$i] = new ParallelThread($closure, $argv);
 	$my->stack($workers[$i]);
 
@@ -50,13 +50,13 @@ foreach (range(0, $threads) as $i) {
  $my->start();
  
  $my->shutdown();
-foreach (range(0, $threads) as $i) {
+foreach (range(0, $threads-1) as $i) {
 //	echo $workers[$i]->result."<BR>"; 
 	$np_result = $np_result + $workers[$i]->result;
 }
 
 
-$pi = 4 * $np_result / ($argv[0]*($threads+1));
+$pi = 4 * $np_result / ($argv[0]*($threads));
 //echo $np_result."<br>";
 echo $pi."<br>";
 echo microtime(true) - $time_start;
