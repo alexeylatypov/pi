@@ -32,7 +32,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [10000];
+$argv = [1000000];
 
 $time_start = microtime(true);
 $np_result =0;
