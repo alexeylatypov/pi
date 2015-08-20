@@ -48,6 +48,7 @@ foreach (range(0, 10) as $i) {
 //	$np_result = $np_result + $tmp_res['results'];
 }
  $my->start();
+ var_dump($my->unstack($my));
  $my->shutdown();
 
 $pi = 4 * $np_result / ($argv[0]*11);
