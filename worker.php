@@ -67,9 +67,9 @@ $p->collect(function($checkingTask){
 	$np_result = $np_result + $tmp_res['results'];
 	echo $np_result."<BR>";
 
-  return $checkingTask->$np_result;
+  return $checkingTask->result;
 });
-
+var_dump($p);
 
 $pi = 4 * $p / (10*100);
 echo "PI = ".$pi."<br>";
