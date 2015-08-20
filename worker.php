@@ -2,12 +2,14 @@
 class ChildThread extends Thread {
     public $data;
 	public $id;
-
+public $rnd;
     public function run() {
       /* Do some work */
-
-      $this->data = microtime(true);
-	  $this->id = $this->getCurrentThreadId();
+	$this->rnd = rand (0,1000);
+	
+    $this->data = microtime(true);
+	$this->id = $this->getCurrentThreadId();
+	sleep($this->rnd);
 	  
     }
 }
@@ -20,10 +22,12 @@ if ($thread->start()) {
      * Do some work here, while already doing other
      * work in the child thread.
      */
-
+	
     // wait until thread is finished
     $thread->join();
+	echo "Thread #1 (must be)";
 	var_dump($thread);
+	echo "<BR>";
     // we can now even access $thread->data
 }
 if ($thread1->start()) {
@@ -34,7 +38,9 @@ if ($thread1->start()) {
 
     // wait until thread is finished
     $thread1->join();
+	echo "Thread #2 (must be)";
 	var_dump($thread1);
+	echo "<BR>";
     // we can now even access $thread->data
 }
 
