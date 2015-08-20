@@ -50,7 +50,12 @@ foreach (range(0, 10) as $i) {
  $my->start();
  
  $my->shutdown();
-var_dump($workers);
+foreach (range(0, 10) as $i) {
+	echo $workers[$i]->result."<BR>"; 
+	$np_result = $np_result + $workers[$i]->result;
+}
+
+
 $pi = 4 * $np_result / ($argv[0]*11);
 echo $np_result."<br>";
 echo $pi."<br>";
