@@ -29,12 +29,12 @@ class ParallelThread extends Thread {
  //       });
     }
     public function getResult() {
-        return $this->synchronized(function(){
+//        return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
 
             return json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result));
-        });
+//       });
     }
     
 
