@@ -41,7 +41,7 @@ $np_result =0;
 $my = new Worker();
 
 foreach (range(0, 10) as $i) {
-    $workers[$i] =ParallelThread::add($closure, $argv);
+    $workers[$i] = new ParallelThread($closure, $argv);
 	$my->stack($workers[$i]);
 	//$workers[$i]->start();
 //	$tmp_res = json_decode($workers[$i]->getResult(), true);
