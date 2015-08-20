@@ -38,7 +38,7 @@ $time_start = microtime(true);
 $np_result =0;
 // Initialize and start the threads
 foreach (range(0, 10) as $i) {
-    $workers[$i] = new ParallelThread(($closure, $argv);
+    $workers[$i] = new ParallelThread($closure, $argv);
 	$workers[$i].start();
 	//$workers[$i]->start();
 	$tmp_res = json_decode($workers[$i]->getResult(), true);
