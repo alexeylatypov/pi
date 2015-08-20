@@ -8,7 +8,7 @@
 *
 * 
 **/
-class ParallelThread extends Thread {
+class ParallelThread extends Threaded {
 
 	
 	
