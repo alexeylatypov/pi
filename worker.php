@@ -1,37 +1,31 @@
 <?php
-class storage extends Threaded {
-    public function run(){
-		
-	}
+$descriptorspec = array(
+   0 => array("pipe", "r"),  // stdin - канал, из которого дочерний процесс будет читать
+   1 => array("pipe", "w"),  // stdout - канал, в который дочерний процесс будет записывать 
+   2 => array("file", "/tmp/error-output.txt", "a") // stderr - файл для записи
+);
+
+$cwd = '/tmp';
+$env = array('some_option' => 'aeiou');
+
+$process = proc_open('php', $descriptorspec, $pipes, $cwd, $env);
+
+if (is_resource($process)) {
+    // $pipes теперь выглядит так:
+    // 0 => записывающий обработчик, подключенный к дочернему stdin
+    // 1 => читающий обработчик, подключенный к дочернему stdout
+    // Вывод сообщений об ошибках будет добавляться в /tmp/error-output.txt
+
+    fwrite($pipes[0], '<?php print_r($_ENV); ?>');
+    fclose($pipes[0]);
+
+    echo stream_get_contents($pipes[1]);
+    fclose($pipes[1]);
+
+    // Важно закрывать все каналы перед вызовом
+    // proc_close во избежание мертвой блокировки
+    $return_value = proc_close($process);
+
+    echo "команда вернула $return_value\n";
 }
-
-class my extends Thread {
-    public function __construct($storage) {
-        $this->storage = $storage; 
-		$this->id = $this->getCurrentThread(); 
-    }
-
-    public function run(){
-        $i = 0;
-        while(++$i < 10) {
-            $this->storage[]=rand(0,1000);
-
-		
-        }
-echo $this->getCurrentThreadId()."<BR>"; 
-        $this->synchronized(function($thread){
-            $thread->notify();
-        }, $this);
-    } 
-}
-
-$storage = new storage();
-$my = new my($storage);
-$my->start();
-
-$my->synchronized(function($thread){
-    $thread->wait();
-}, $my);
-
-var_dump($storage);
 ?>
