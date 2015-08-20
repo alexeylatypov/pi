@@ -5,7 +5,7 @@ class ChildThread extends Thread {
 public $rnd;
     public function run() {
       /* Do some work */
-	$this->rnd = rand (0,1000);
+	$this->rnd = rand (0,20);
 	
     $this->data = microtime(true);
 	$this->id = $this->getCurrentThreadId();
