@@ -6,6 +6,7 @@ class storage extends Threaded {
 class my extends Thread {
     public function __construct($storage) {
         $this->storage = $storage; 
+		$this->id = $this->getCurrentThread(); 
     }
 
     public function run(){
