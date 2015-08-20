@@ -16,7 +16,7 @@ function __autoload($class_name) {
 *
 */
 $threads = 4;
-$interation = 10000000;
+$interation = 100000000;
 
 $closure = function($n) {
 	$np=0;
