@@ -13,6 +13,7 @@ class ChildThread extends Thread {
 }
 
 $thread = new ChildThread();
+$thread1 = new ChildThread();
 
 if ($thread->start()) {
     /*
@@ -23,6 +24,17 @@ if ($thread->start()) {
     // wait until thread is finished
     $thread->join();
 	var_dump($thread);
+    // we can now even access $thread->data
+}
+if ($thread1->start()) {
+    /*
+     * Do some work here, while already doing other
+     * work in the child thread.
+     */
+
+    // wait until thread is finished
+    $thread1->join();
+	var_dump($thread1);
     // we can now even access $thread->data
 }
 
