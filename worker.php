@@ -60,7 +60,7 @@ foreach ($tasks as $task) {
 $p->shutdown();
 // garbage collection check / read results
 $p->collect(function($checkingTask){
-  echo $checkingTask->result;
+  echo $checkingTask->result."<BR>";
   return $checkingTask->result;
 });
 
