@@ -32,8 +32,7 @@ class ParallelThread extends Thread {
         return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
-			var_dump(json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result)));
-            echo "<BR>";
+			
 			return json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result));
        });
     }
