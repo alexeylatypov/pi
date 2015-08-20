@@ -60,7 +60,7 @@ foreach ($tasks as $task) {
 $p->shutdown();
 // garbage collection check / read results
 
-$p->collect(function($checkingTask){
+$p->collect($testnp = function($checkingTask){
 	$np_result=0;
 	echo $checkingTask->result."<BR>";
 	$tmp_res = json_decode($checkingTask->result, true);
@@ -69,7 +69,7 @@ $p->collect(function($checkingTask){
 
   return $checkingTask->result;
 });
-var_dump($p);
+var_dump($testnp);
 
 $pi = 4 * $p / (10*100);
 echo "PI = ".$pi."<br>";
