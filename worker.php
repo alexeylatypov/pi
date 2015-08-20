@@ -7,7 +7,7 @@ class ChildThread extends Thread {
       /* Do some work */
 
       $this->data = microtime(true);
-	  $this->id = $this->getCurrentThreadId()
+	  $this->id = $this->getCurrentThreadId();
 	  
     }
 }
