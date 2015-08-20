@@ -1,6 +1,8 @@
 <?php
 class storage extends Threaded {
-    public function run(){}
+    public function run(){
+		echo $this->getCurrentThread()."<BR>"; 
+	}
 }
 
 class my extends Thread {
