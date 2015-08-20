@@ -1,50 +1,32 @@
 <?php
-class ChildThread extends Thread {
-    public $data;
-	public $id;
-	public $parent_id;
-public $rnd;
-    public function run() {
-      /* Do some work */
-	$this->rnd = rand (0,20);
-	
-    $this->data = microtime(true);
-	$this->id = $this->getCurrentThreadId();
-	$this->parent_id = $this->getCreatorId();
-	
-	sleep($this->rnd);
-	  
+class storage extends Threaded {
+    public function run(){}
+}
+
+class my extends Thread {
+    public function __construct($storage) {
+        $this->storage = $storage; 
     }
+
+    public function run(){
+        $i = 0;
+        while(++$i < 10) {
+            $this->storage[]=rand(0,1000);
+        }
+
+        $this->synchronized(function($thread){
+            $thread->notify();
+        }, $this);
+    } 
 }
 
-$thread = new ChildThread();
-$thread1 = new ChildThread();
+$storage = new storage();
+$my = new my($storage);
+$my->start();
 
-if ($thread->start()) {
-    /*
-     * Do some work here, while already doing other
-     * work in the child thread.
-     */
-	
-    // wait until thread is finished
-    $thread->join();
-	echo "Thread #1 (must be)";
-	var_dump($thread);
-	echo "<BR>";
-    // we can now even access $thread->data
-}
-if ($thread1->start()) {
-    /*
-     * Do some work here, while already doing other
-     * work in the child thread.
-     */
+$my->synchronized(function($thread){
+    $thread->wait();
+}, $my);
 
-    // wait until thread is finished
-    $thread1->join();
-	echo "Thread #2 (must be)";
-	var_dump($thread1);
-	echo "<BR>";
-    // we can now even access $thread->data
-}
-
+var_dump($storage);
 ?>
