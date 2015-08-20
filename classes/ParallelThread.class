@@ -23,10 +23,10 @@ class ParallelThread extends Thread {
 	
     public function run() {
         $closure = $this->closure;
-        $this->synchronized(function() use($closure) {
+ //       $this->synchronized(function() use($closure) {
             $this->result = $closure(...$this->args);
             $this->notify();
-        });
+ //       });
     }
     public function getResult() {
         return $this->synchronized(function(){
