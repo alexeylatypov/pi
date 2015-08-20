@@ -24,7 +24,7 @@ $closure = function($n) {
 		$x=lcg_value()*2-1;
 		$y=lcg_value()*2-1;
 		//var_dump($x+''+$y);
-		if((pow($x,2)+pow($y,2))<=1) {
+		if(($x**2+$y**2)<=1) {
 			$np++;
 		}
 	}
