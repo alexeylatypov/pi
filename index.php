@@ -21,8 +21,8 @@ $interation = 1000000;
 $closure = function($n) {
 	$np=0;
 	for ($i=0; $i<=$n; $i++){
-		$x=lcg_value*2-1;
-		$y=lcg_value*2-1;
+		$x=lcg_value()*2-1;
+		$y=lcg_value()*2-1;
 		//var_dump($x+''+$y);
 		if((pow($x,2)+pow($y,2))<=1) {
 			$np++;
