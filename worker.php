@@ -14,7 +14,7 @@ class job extends Collectable {
     // do some work
      $newjob = $this->newjob;
         $this->synchronized(function() use($newjob) {
-            $this->result = $newjob($this->val);
+            $this->result = json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $newjob($this->val)));
        });
   }
   
