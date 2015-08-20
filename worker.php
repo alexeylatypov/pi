@@ -24,7 +24,7 @@ class job extends Collectable {
 
 // At most 3 threads will work at once
 $p = new Pool(3);
-
+$time_start = microtime(true);
 $closure = function($n) {
 	$np=0;
 	for ($i=0; $i<=$n; $i++){
@@ -60,8 +60,17 @@ foreach ($tasks as $task) {
 $p->shutdown();
 // garbage collection check / read results
 $p->collect(function($checkingTask){
-  echo $checkingTask->result."<BR>";
+	echo $checkingTask->result."<BR>";
+	$tmp_res = json_decode($checkingTask->result, true);
+	$np_result = $np_result + $tmp_res['results'];
   return $checkingTask->result;
 });
+
+
+$pi = 4 * $np_result / (10*100);
+echo $np_result."<br>";
+echo "PI = ".$pi."<br>";
+echo "Timer is ".microtime(true) - $time_start;
+
 
 ?>
