@@ -15,8 +15,8 @@ function __autoload($class_name) {
 *
 *
 */
-$threads = 10;
-$interation = 1000000;
+$threads = 20;
+$interation = 10000000;
 
 $closure = function($n) {
 	$np=0;
@@ -34,7 +34,7 @@ $closure = function($n) {
 
 
 /* make call in background thread */
-$argv = [$interation];
+$argv = [$interation/$threads];
 
 $time_start = microtime(true);
 $np_result =0;
