@@ -6,7 +6,8 @@ $descriptorspec = array(
 );
 
 $cwd = '/tmp';
-$env = array('some_option' => 'aeiou');
+//$env = array('some_option' => 'aeiou');
+$env = array();
 
 $process = proc_open('php', $descriptorspec, $pipes, $cwd, $env);
 
