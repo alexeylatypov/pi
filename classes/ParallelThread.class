@@ -23,21 +23,27 @@ class ParallelThread extends Thread {
 	
     public function run() {
         $closure = $this->closure;
- //       $this->synchronized(function() use($closure) {
+        $this->synchronized(function() use($closure) {
             $this->result = $closure(...$this->args);
             $this->notify();
- //       });
+       });
     }
     public function getResult() {
-//        return $this->synchronized(function(){
+        return $this->synchronized(function(){
             while (!$this->result)
                 $this->wait();
 			var_dump(json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result)));
             echo "<BR>";
 			return json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result));
-//       });
+       });
     }
     
+	public static function add(Closure $closure, array $args = []) {
+        $newthread = 
+            new self($closure, $args);
+        $newthread->start();
+        return $newthread;
+    }
 
 	
     protected $closure;
