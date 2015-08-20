@@ -2,6 +2,7 @@
 class ChildThread extends Thread {
     public $data;
 	public $id;
+	public $parent_id;
 public $rnd;
     public function run() {
       /* Do some work */
@@ -9,6 +10,8 @@ public $rnd;
 	
     $this->data = microtime(true);
 	$this->id = $this->getCurrentThreadId();
+	$this->parent_id = $this->getCreatorId();
+	
 	sleep($this->rnd);
 	  
     }
