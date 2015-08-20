@@ -65,6 +65,8 @@ $p->collect(function($checkingTask){
 	echo $checkingTask->result."<BR>";
 	$tmp_res = json_decode($checkingTask->result, true);
 	$np_result = $np_result + $tmp_res['results'];
+	echo $np_result."<BR>";
+
   return $checkingTask->$np_result;
 });
 
