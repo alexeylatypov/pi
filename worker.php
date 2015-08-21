@@ -7,7 +7,8 @@ function __autoload($class_name) {
       return false; 
 }
 
-$cmd = Command::factory('ls');
+$phpscrit="phpinfo();";
+$cmd = Command::factory('php');
 $cmd->setCallback(function($pipe, $data){
         if ($pipe === Command::STDOUT) echo 'STDOUT: ';
         if ($pipe === Command::STDERR) echo 'STDERR: ';
@@ -16,7 +17,7 @@ $cmd->setCallback(function($pipe, $data){
         // return false;
     })
     ->setDirectory('/tmp')
-    ->option('-l')
+    ->option($phpscrit)
     ->run();
 if ($cmd->getExitCode() === 0) {
     echo $cmd->getStdOut();
