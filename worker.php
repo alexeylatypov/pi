@@ -1,33 +1,26 @@
 <?php
-$descriptorspec = array(
-   0 => array("pipe", "r"),  // stdin - канал, из которого дочерний процесс будет читать
-   1 => array("pipe", "w"),  // stdout - канал, в который дочерний процесс будет записывать 
-   2 => array("file", "/tmp/error-output.txt", "a") // stderr - файл для записи
-);
+function __autoload($class_name) {
+  if (file_exists('classes/'.$class_name . '.class')) { 
+  require_once 'classes/'.$class_name . '.class';
+          return true; 
+      } 
+      return false; 
+}
 
-$cwd = '/tmp';
-//$env = array('some_option' => 'aeiou');
-$env = array();
-
-$process = proc_open('php', $descriptorspec, $pipes, $cwd, $env);
-
-if (is_resource($process)) {
-    // $pipes теперь выглядит так:
-    // 0 => записывающий обработчик, подключенный к дочернему stdin
-    // 1 => читающий обработчик, подключенный к дочернему stdout
-    // Вывод сообщений об ошибках будет добавляться в /tmp/error-output.txt
-
-	$testscript = "<?php\n echo 'echo working'	?>";
-    fwrite($pipes[0], $testscript);
-    fclose($pipes[0]);
-
-    echo stream_get_contents($pipes[1]);
-    fclose($pipes[1]);
-
-    // Важно закрывать все каналы перед вызовом
-    // proc_close во избежание мертвой блокировки
-    $return_value = proc_close($process);
-
-    echo "команда вернула $return_value\n";
+$cmd = Command::factory('ls');
+$cmd->setCallback(function($pipe, $data){
+        if ($pipe === Command::STDOUT) echo 'STDOUT: ';
+        if ($pipe === Command::STDERR) echo 'STDERR: ';
+        echo $data === NULL ? "EOF\n" : "$data\n";
+        // If we return "false" all pipes will be closed
+        // return false;
+    })
+    ->setDirectory('/tmp')
+    ->option('-l')
+    ->run();
+if ($cmd->getExitCode() === 0) {
+    echo $cmd->getStdOut();
+} else {
+    echo $cmd->getStdErr();
 }
 ?>
