@@ -28,6 +28,7 @@ class ParallelThread extends Thread {
             $this->result = $closure(...$this->args);
 
 			printf(json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result, 'start_time' => $this->time_start)));
+			echo "<BR>";
             $this->notify();
        });
     }

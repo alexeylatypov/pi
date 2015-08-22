@@ -53,7 +53,7 @@ while(++$o<$threads) {
 foreach($work as $w)
 	$worker->stack($w);
 
-printf("Worker started\n");
+
 	$worker->start();
 
 
@@ -62,7 +62,7 @@ printf("Worker started\n");
 //echo $np_result."<br>";
 //echo $pi."<br>";
 echo microtime(true) - $time_start;
-printf("Worker shutdown\n");
+
 $worker->shutdown();
 
 ?>
