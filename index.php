@@ -77,7 +77,7 @@ $work = array();
 
 while(++$o<$threads) {
 	/* items stacked could be using resources available in worker */
-	$work[]=new MainThread($closure, $argv);
+	$work[]=new ParallelThread($closure, $argv);
 }
 
 foreach($work as $w)
