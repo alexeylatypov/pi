@@ -22,7 +22,7 @@ $closure = function($n) {
 	
     return $np;
 };
-echo $phpscrit;
+echo $closure;
 ';
 
 
