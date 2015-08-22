@@ -131,7 +131,8 @@ class MyWork extends Stackable {
 							$np++;
 						}
 					}
-    return $np;
+					return $np;
+				}
 			);
 			/*
 			* This stackable, being executed by a worker to manipulate a global object, created in another thread ...
