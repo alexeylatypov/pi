@@ -121,9 +121,9 @@ class MyWork extends Stackable {
 			
 			$storage->addToObject(
 				$this->stored,
-				$closure = function($n) {
+				$closure = function() {
 					$np=0;
-					for ($i=0; $i<=$n; $i++){
+					for ($i=0; $i<=1000; $i++){
 						$x=lcg_value()*2-1;
 						$y=lcg_value()*2-1;
 		
