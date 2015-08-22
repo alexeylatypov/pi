@@ -9,8 +9,7 @@ function __autoload($class_name) {
 
 $phpscrit="
 $n = 10;
-$closure = function($n) {
-	$np=0;
+
 	for ($i=0; $i<=$n; $i++){
 		$x=lcg_value()*2-1;
 		$y=lcg_value()*2-1;
@@ -20,9 +19,8 @@ $closure = function($n) {
 		}
 	}
 	
-    return $np;
-};
-echo $closure;
+
+echo $np;
 ";
 
 
