@@ -44,7 +44,7 @@ $np_result =0;
 $worker = new Worker();
 
 $work = array();
-
+$o=0;
 while(++$o<$threads) {
 	/* items stacked could be using resources available in worker */
 	$work[]=new ParallelThread($closure, $argv);
@@ -53,7 +53,7 @@ while(++$o<$threads) {
 foreach($work as $w)
 	$worker->stack($w);
 
-echo "Worker started<br>";
+printf("Worker started\n");
 	$worker->start();
 
 
@@ -62,7 +62,7 @@ echo "Worker started<br>";
 //echo $np_result."<br>";
 //echo $pi."<br>";
 echo microtime(true) - $time_start;
-echo "Worker shutdown<br>";
+printf("Worker shutdown\n");
 $worker->shutdown();
 
 ?>
