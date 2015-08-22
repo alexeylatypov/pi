@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 class AsyncOperation extends Thread {
   public function __construct($arg){
     $this->arg = $arg;
