@@ -22,6 +22,7 @@ class MainThread extends Thread {
     public function run() {
         $closure = $this->closure;
         $args = $this->args;
+		echo "I'm started<br>";
 		$this->childs = new ParallelThread($closure, $args);
 		$this->childs->start();
         $this->notify();
