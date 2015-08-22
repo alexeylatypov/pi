@@ -16,7 +16,7 @@ function __autoload($class_name) {
 *
 */
 $threads = 4;
-$interation = 100000000;
+$interation = 10000;
 
 $closure = function($n) {
 	$np=0;
@@ -41,7 +41,7 @@ $np_result =0;
 
 
 $worker = new Worker();
-
+$worker->start();
 $work = array();
 
 while(++$o<$threads) {
@@ -54,7 +54,7 @@ foreach($work as $w)
 
 echo "Worker started<br>";
 	
-$worker->start();
+
 echo "Worker shutdown<br>";
 $worker->shutdown();
 
