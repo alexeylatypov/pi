@@ -7,7 +7,7 @@ function __autoload($class_name) {
       return false; 
 }
 
-$phpscrit='
+$phpscrit="
 $n = 10;
 $closure = function($n) {
 	$np=0;
@@ -23,7 +23,7 @@ $closure = function($n) {
     return $np;
 };
 echo $closure;
-';
+";
 
 
 
