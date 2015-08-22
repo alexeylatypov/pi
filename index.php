@@ -41,8 +41,7 @@ $np_result =0;
 
 
 $worker = new Worker();
-$worker->start();
-echo "Worker started<br>";
+
 $work = array();
 
 while(++$o<$threads) {
@@ -52,6 +51,10 @@ while(++$o<$threads) {
 
 foreach($work as $w)
 	$worker->stack($w);
+
+echo "Worker started<br>";
+	
+$worker->start();
 echo "Worker shutdown<br>";
 $worker->shutdown();
 
