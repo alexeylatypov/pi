@@ -17,8 +17,8 @@ $cmd->setCallback(function($pipe, $data){
         // return false;
     })
     ->setDirectory('/tmp')
-    ->option('$phpscrit')
-	->argument()
+    ->option('-r')
+	->argument($phpscrit)
     ->run();
 if ($cmd->getExitCode() === 0) {
     echo $cmd->getStdOut();
