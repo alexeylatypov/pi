@@ -64,6 +64,7 @@ class MyThread extends Thread {
 		/* ANY other type of object DOES */
 		if ($this->storage) {
 			printf("%s (%lu) STORAGE AVAILABLE\n", __METHOD__, $this->getThreadId());
+			echo "<BR>";
 			$this->stored = $this->storage->getUniqueId();
 			$this->storage->addToObject(
 				$this->stored,
@@ -71,6 +72,7 @@ class MyThread extends Thread {
 			);
 			if ($this->worker) {
 				printf("%s (%lu) WORKER AVAILABLE\n", __METHOD__, $this->getThreadId());
+				echo "<BR>";
 				if (!$this->worker->isShutdown()){
 					$work = new MyWork($this->storage);
 					$this->worker->stack($work);
@@ -78,6 +80,7 @@ class MyThread extends Thread {
 				} else printf("%s (%lu) WORKER SHUTDOWN\n", __METHOD__, $this->getThreadId());
 			} else printf("NO WORKER !!\n");
 			printf("%s (%lu) STORED %s@%s\n", __METHOD__, $this->getThreadId(), $this->storage->fetch($this->stored), $this->getStorageId());
+			echo "<BR>";
 		} else printf("%s (%lu) NO STORAGE\n", __METHOD__, $this->getThreadId());
 	}
 	
@@ -168,6 +171,7 @@ foreach($work as $w)
 /* done with worker, execute everything */
 $worker->shutdown();
 printf("set by stackables...:\n");
+echo "<BR>";
 foreach($work as $w)
 	var_dump($storage->fetch($w->getStorageId()));
 printf("set by threads executed by stackables executing in a worker: ...\n");
@@ -176,6 +180,7 @@ foreach($work as $w) {
 		var_dump($storage->fetch($w->getThreadStorageId()));
 }
 printf("set by the worker (alt syntax):\n");
+echo "<BR>";
 var_dump($storage->fetch("GlobalWorker"));
 /* 
 	@NOTE pretty cool, right ?
