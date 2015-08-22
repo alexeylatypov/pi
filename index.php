@@ -40,11 +40,11 @@ $time_start = microtime(true);
 $np_result =0;
 // Initialize and start the threads
 
-$my = new Worker();
+//$my = new Worker();
 
 foreach (range(0, $threads-1) as $i) {
-    $workers[$i] = new ParallelThread($closure, $argv);
-	$my->stack($workers[$i]);
+    $threads[$i] = new ParallelThread($closure, $argv);
+//	$my->stack($workers[$i]);
 
 }
  $my->start();
@@ -52,7 +52,7 @@ foreach (range(0, $threads-1) as $i) {
  $my->shutdown();
 foreach (range(0, $threads-1) as $i) {
 //	echo $workers[$i]->result."<BR>"; 
-	$np_result = $np_result + $workers[$i]->result;
+	$np_result = $np_result + $threads[$i]->result;
 }
 
 

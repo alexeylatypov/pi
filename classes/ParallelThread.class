@@ -8,7 +8,7 @@
 *
 * 
 **/
-class ParallelThread extends Threaded {
+class ParallelThread extends Thread {
 
 	
 	
@@ -25,6 +25,8 @@ class ParallelThread extends Threaded {
         $closure = $this->closure;
         $this->synchronized(function() use($closure) {
             $this->result = $closure(...$this->args);
+
+
 			echo json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result, 'start_time' => $this->time_start))."<BR>";
             $this->notify();
        });
