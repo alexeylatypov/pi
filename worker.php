@@ -1,17 +1,28 @@
 <?php
-error_reporting(E_ALL);
-class AsyncOperation extends Thread {
-  public function __construct($arg){
-    $this->arg = $arg;
-  }
-
-  public function run(){
-    if($this->arg){
-      printf("Hello %s\n", $this->arg);
-    }
-  }
+function __autoload($class_name) {
+  if (file_exists('classes/'.$class_name . '.class')) { 
+  require_once 'classes/'.$class_name . '.class';
+          return true; 
+      } 
+      return false; 
 }
-$thread = new AsyncOperation("World");
-if($thread->start())
-  $thread->join();
+
+$phpscrit='<?php phpinfo(); ?>';
+$cmd = Command::factory('php');
+$cmd->setCallback(function($pipe, $data){
+        if ($pipe === Command::STDOUT) echo 'STDOUT: ';
+        if ($pipe === Command::STDERR) echo 'STDERR: ';
+        echo $data === NULL ? "EOF\n" : "$data\n";
+        // If we return "false" all pipes will be closed
+        // return false;
+    })
+    ->setDirectory('/tmp')
+    ->option('')
+	->argument($phpscrit)
+    ->run();
+if ($cmd->getExitCode() === 0) {
+    echo $cmd->getStdOut();
+} else {
+    echo $cmd->getStdErr();
+}
 ?>
