@@ -147,7 +147,7 @@ class MyWork extends Stackable {
 	
 	public function getStorageId() { 
 	
-	$n = 1000;
+	$n = 10000;
 		
 		$np=0;
 				for ($i=0; $i<=$n; $i++){
