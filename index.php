@@ -19,9 +19,9 @@ function __autoload($class_name) {
 $threads = 4;
 $interation = 10000;
 
-$closure = function($n=rand(0,10000)) {
+$closure = function($n) {
 	$np=0;
-				for ($i=0; $i<=$n; $i++){
+				for ($i=0; $i<=rand(0,10000); $i++){
 					$x=lcg_value()*2-1;
 					$y=lcg_value()*2-1;
 		
