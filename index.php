@@ -40,24 +40,23 @@ $np_result =0;
 // Initialize and start the threads
 
 
+$worker = new GlobalWorker();
+$worker->start();
+$work = array();
 
-foreach (range(0, $threads-1) as $i) {
-    $th[$i] = new ParallelThread($closure, $argv);
-	if($th[$i]->start())
-		$th[$i]->join();
-
-
+while(++$o<$threads) {
+	/* items stacked could be using resources available in worker */
+	$work[]=new ParallelThread($closure, $argv);
 }
 
-foreach (range(0, $threads-1) as $i) {
-//	echo $workers[$i]->result."<BR>"; 
-	$np_result = $np_result + $th[$i]->result;
-}
+foreach($work as $w)
+	$worker->stack($w);
 
+$worker->shutdown();
 
-$pi = 4 * $np_result / ($argv[0]*($threads));
+//$pi = 4 * $np_result / ($argv[0]*($threads));
 //echo $np_result."<br>";
-echo $pi."<br>";
+//echo $pi."<br>";
 echo microtime(true) - $time_start;
 
 ?>
