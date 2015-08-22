@@ -7,7 +7,7 @@ function __autoload($class_name) {
       return false; 
 }
 
-$phpscrit='<?php phpinfo(); ?>';
+$phpscrit='phpinfo();';
 $cmd = Command::factory('php');
 $cmd->setCallback(function($pipe, $data){
         if ($pipe === Command::STDOUT) echo 'STDOUT: ';
