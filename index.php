@@ -21,7 +21,7 @@ $interation = 100000000;
 
 $closure = function($n) {
 	$np=0;
-				for ($i=0; $i<=rand(1000,100000); $i++){
+				for ($i=0; $i<=$n; $i++){
 					$x=lcg_value()*2-1;
 					$y=lcg_value()*2-1;
 		
