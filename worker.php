@@ -108,6 +108,7 @@ class MyWork extends Stackable {
 	public $thread;
 	public $storage;
 	public $tstored;
+	private $closure;
 	
 	public function __construct($storage) {
 		$this->storage = $storage;
@@ -116,8 +117,22 @@ class MyWork extends Stackable {
 	
 	public function run(){
 		/* read once, see above ... */
+		$n = 1000;
+		$closure = function($n) {
+		$np=0;
+				for ($i=0; $i<=$n; $i++){
+					$x=lcg_value()*2-1;
+					$y=lcg_value()*2-1;
+		
+					if(($x**2+$y**2)<=1) {
+						$np++;
+					}
+				}
+		return $np;
+		};
+
 		if (($storage = $this->storage)) {
-			$this->stored = $storage->getUniqueId();
+			$this->stored = $closure;
 			
 			$storage->addToObject(
 				$this->stored,
@@ -143,6 +158,7 @@ class MyWork extends Stackable {
 	}
 	
 	public function getStorageId() { return $this->stored; }
+	
 	public function getThreadStorageId() { return $this->tstored; }
 }
 /* this object we will pass everywhere we can */
