@@ -121,18 +121,7 @@ class MyWork extends Stackable {
 			
 			$storage->addToObject(
 				$this->stored,
-				function() {
-					$np=0;
-					for ($i=0; $i<=1000; $i++){
-						$x=lcg_value()*2-1;
-						$y=lcg_value()*2-1;
-		
-						if(($x**2+$y**2)<=1) {
-							$np++;
-						}
-					}
-					return $np;
-				}
+				array(rand()*120)
 			);
 			/*
 			* This stackable, being executed by a worker to manipulate a global object, created in another thread ...
