@@ -8,16 +8,6 @@
 *
 * 
 **/
-class GlobalWorker extends Worker {
-	public function __construct(){
-	}
-	
-	public function run() {
-
-	}
-	
-	/* some useful methods for stackables to fetch connections and whatever here */
-}
 
 class ParallelThread extends Thread {
 

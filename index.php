@@ -40,7 +40,7 @@ $np_result =0;
 // Initialize and start the threads
 
 
-$worker = new GlobalWorker();
+$worker = new Worker();
 $worker->start();
 echo "Worker started<br>";
 $work = array();
