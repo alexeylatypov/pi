@@ -7,7 +7,27 @@ function __autoload($class_name) {
       return false; 
 }
 
-$phpscrit='phpinfo();';
+$phpscrit='
+$n = 10;
+$closure = function($n) {
+	$np=0;
+	for ($i=0; $i<=$n; $i++){
+		$x=lcg_value()*2-1;
+		$y=lcg_value()*2-1;
+		//var_dump($x+''+$y);
+		if(($x**2+$y**2)<=1) {
+			$np++;
+		}
+	}
+	
+    return $np;
+};
+echo $phpscrit;
+';
+
+
+
+
 $cmd = Command::factory('php');
 $cmd->setCallback(function($pipe, $data){
         if ($pipe === Command::STDOUT) echo 'STDOUT: ';
