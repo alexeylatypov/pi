@@ -117,22 +117,10 @@ class MyWork extends Stackable {
 	
 	public function run(){
 		/* read once, see above ... */
-		$n = 1000;
-		$closure = function($n) {
-		$np=0;
-				for ($i=0; $i<=$n; $i++){
-					$x=lcg_value()*2-1;
-					$y=lcg_value()*2-1;
 		
-					if(($x**2+$y**2)<=1) {
-						$np++;
-					}
-				}
-		return $np;
-		};
 
 		if (($storage = $this->storage)) {
-			$this->stored = $closure;
+			$this->stored = $storage->getUniqueId();
 			
 			$storage->addToObject(
 				$this->stored,
@@ -157,7 +145,23 @@ class MyWork extends Stackable {
 		}
 	}
 	
-	public function getStorageId() { return $this->stored; }
+	public function getStorageId() { 
+	
+	$n = 1000;
+		
+		$np=0;
+				for ($i=0; $i<=$n; $i++){
+					$x=lcg_value()*2-1;
+					$y=lcg_value()*2-1;
+		
+					if(($x**2+$y**2)<=1) {
+						$np++;
+					}
+				}
+
+		
+		return $np; 
+	}
 	
 	public function getThreadStorageId() { return $this->tstored; }
 }
