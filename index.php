@@ -7,37 +7,7 @@ function __autoload($class_name) {
       } 
       return false; 
 }
-class MainThread extends Thread {
 
-	
-	
-    public function __construct(Closure $closure, array $args = []) {
-        $this->closure = $closure;
-        $this->args    = $args;
-		
-    }
-	
-	
-	
-    public function run() {
-        $closure = $this->closure;
-        $args = $this->args;
-		echo "I'm started<br>";
-		$this->childs = new ParallelThread($closure, $args);
-		$this->childs->start();
-        $this->notify();
-       });
-    }
-
-    
-
-	
-    protected $closure;
-    protected $args;
-	protected  $childs;
-	
-
-}
 
 
 /* 
