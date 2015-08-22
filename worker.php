@@ -9,7 +9,7 @@ function __autoload($class_name) {
 
 $myfile = fopen("/tmp/script.php", "w") or die("Unable to open file!");
 $txt = "
-$n=0;
+<?php\n $n=0;
 $closure = function($n) {
 	$np=0;
 	for ($i=0; $i<=$n; $i++){
@@ -24,6 +24,7 @@ $closure = function($n) {
     return $np;
 };
 echo $closure;
+?>
 \n";
 
 fwrite($myfile, $txt);
