@@ -46,7 +46,7 @@ $cmd->setCallback(function($pipe, $data){
     })
     ->setDirectory('/tmp')
     ->option('-r')
-	->argument('/tmp/script.php')
+	->argument('script.php')
     ->run();
 if ($cmd->getExitCode() === 0) {
     echo $cmd->getStdOut();
