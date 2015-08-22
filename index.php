@@ -22,8 +22,8 @@ class MainThread extends Thread {
     public function run() {
         $closure = $this->closure;
         $args = $this->args;
-		$childs = $this->childs;
-		$childs = new ParallelThread($closure, $args);
+		$this->childs = new ParallelThread($closure, $args);
+		$this->childs->start();
         $this->notify();
        });
     }
