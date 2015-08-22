@@ -23,7 +23,7 @@ class MainThread extends Thread {
         $closure = $this->closure;
         $args = $this->args;
 		$childs = $this->childs;
-		$childs = new ParallelThread($closure, $argv);
+		$childs = new ParallelThread($closure, $args);
         $this->notify();
        });
     }
