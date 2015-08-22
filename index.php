@@ -44,7 +44,9 @@ $np_result =0;
 
 foreach (range(0, $threads-1) as $i) {
     $th[$i] = new ParallelThread($closure, $argv);
-	 $th[$i].start();
+	if($th[$i]->start())
+		$th[$i]->join();
+
 
 }
 
