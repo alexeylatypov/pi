@@ -7,9 +7,11 @@ function __autoload($class_name) {
       return false; 
 }
 
-$phpscrit="
-$n = 10;
-
+$myfile = fopen("/tmp/script.php", "w") or die("Unable to open file!");
+$txt = "
+$n=0;
+$closure = function($n) {
+	$np=0;
 	for ($i=0; $i<=$n; $i++){
 		$x=lcg_value()*2-1;
 		$y=lcg_value()*2-1;
@@ -19,9 +21,17 @@ $n = 10;
 		}
 	}
 	
+    return $np;
+};
+echo $closure;
+\n";
 
-echo $np;
-";
+fwrite($myfile, $txt);
+
+fclose($myfile);
+
+
+$phpscrit="";
 
 
 
@@ -36,7 +46,7 @@ $cmd->setCallback(function($pipe, $data){
     })
     ->setDirectory('/tmp')
     ->option('-r')
-	->argument($phpscrit)
+	->argument('/tmp/script.php')
     ->run();
 if ($cmd->getExitCode() === 0) {
     echo $cmd->getStdOut();
