@@ -32,7 +32,7 @@ class MainThread extends Thread {
 
 	
     protected $closure;
-    protected $;
+    protected $args;
 	protected  $childs;
 	
 
