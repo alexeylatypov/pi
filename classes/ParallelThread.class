@@ -24,13 +24,13 @@ class ParallelThread extends Thread {
 	
     public function run() {
         $closure = $this->closure;
-        $this->synchronized(function() use($closure) {
+  //      $this->synchronized(function() use($closure) {
             $this->result = $closure(...$this->args);
 
 			printf(json_encode(array( 'duration' => microtime(true)-$this->time_start, 'results' => $this->result, 'start_time' => $this->time_start)));
 			echo "<BR>";
             $this->notify();
-       });
+   //    });
     }
 
     
