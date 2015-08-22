@@ -19,7 +19,7 @@ function __autoload($class_name) {
 $threads = 4;
 $interation = 10000;
 
-$closure = function($n) {
+$closure = function($n=rand(0,10000)) {
 	$np=0;
 				for ($i=0; $i<=$n; $i++){
 					$x=lcg_value()*2-1;
