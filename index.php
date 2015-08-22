@@ -42,6 +42,7 @@ $np_result =0;
 
 $worker = new GlobalWorker();
 $worker->start();
+echo "Worker started<br>";
 $work = array();
 
 while(++$o<$threads) {
@@ -51,7 +52,7 @@ while(++$o<$threads) {
 
 foreach($work as $w)
 	$worker->stack($w);
-
+echo "Worker shutdown<br>";
 $worker->shutdown();
 
 //$pi = 4 * $np_result / ($argv[0]*($threads));
