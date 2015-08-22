@@ -95,10 +95,10 @@ class GlobalWorker extends Worker {
 	
 	public function run() {
 		/* setup some connections and whatever */
-		while(++$o<20)
-			$a[$o]=rand()*1009;
-		/* this works, incase anyone cares */
-		$this["storage"][__CLASS__]=$a;
+	//	while(++$o<20)
+	//		$a[$o]=rand()*1009;
+	//	/* this works, incase anyone cares */
+	//	$this["storage"][__CLASS__]=$a;
 	}
 	
 	/* some useful methods for stackables to fetch connections and whatever here */
@@ -118,9 +118,20 @@ class MyWork extends Stackable {
 		/* read once, see above ... */
 		if (($storage = $this->storage)) {
 			$this->stored = $storage->getUniqueId();
+			
 			$storage->addToObject(
 				$this->stored,
-				array(rand()*120)
+				$closure = function($n) {
+					$np=0;
+					for ($i=0; $i<=$n; $i++){
+						$x=lcg_value()*2-1;
+						$y=lcg_value()*2-1;
+		
+						if(($x**2+$y**2)<=1) {
+							$np++;
+						}
+					}
+    return $np;
 			);
 			/*
 			* This stackable, being executed by a worker to manipulate a global object, created in another thread ...
