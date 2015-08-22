@@ -7,6 +7,36 @@ function __autoload($class_name) {
       } 
       return false; 
 }
+class MainThread extends Thread {
+
+	
+	
+    public function __construct(Closure $closure, array $args = []) {
+        $this->closure = $closure;
+        $this->args    = $args;
+		
+    }
+	
+	
+	
+    public function run() {
+        $closure = $this->closure;
+        $args = $this->args;
+		$childs = $this->childs;
+		$childs = new ParallelThread($closure, $argv);
+        $this->notify();
+       });
+    }
+
+    
+
+	
+    protected $closure;
+    protected $;
+	protected  $childs;
+	
+
+}
 
 
 /* 
@@ -46,7 +76,7 @@ $work = array();
 
 while(++$o<$threads) {
 	/* items stacked could be using resources available in worker */
-	$work[]=new ParallelThread($closure, $argv);
+	$work[]=new MainThread($closure, $argv);
 }
 
 foreach($work as $w)
@@ -55,12 +85,13 @@ foreach($work as $w)
 echo "Worker started<br>";
 	$worker->start();
 
-echo "Worker shutdown<br>";
-$worker->shutdown();
+
 
 //$pi = 4 * $np_result / ($argv[0]*($threads));
 //echo $np_result."<br>";
 //echo $pi."<br>";
 echo microtime(true) - $time_start;
+echo "Worker shutdown<br>";
+$worker->shutdown();
 
 ?>
