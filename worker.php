@@ -170,15 +170,19 @@ foreach($work as $w)
 */
 /* done with worker, execute everything */
 $worker->shutdown();
+echo "<BR>";
 printf("set by stackables...:\n");
 echo "<BR>";
 foreach($work as $w)
 	var_dump($storage->fetch($w->getStorageId()));
+	echo "<BR>";
 printf("set by threads executed by stackables executing in a worker: ...\n");
+echo "<BR>";
 foreach($work as $w) {
 	if ($w->getThreadStorageId())
 		var_dump($storage->fetch($w->getThreadStorageId()));
 }
+echo "<BR>";
 printf("set by the worker (alt syntax):\n");
 echo "<BR>";
 var_dump($storage->fetch("GlobalWorker"));

@@ -20,15 +20,14 @@ $interation = 100000000;
 
 $closure = function($n) {
 	$np=0;
-	for ($i=0; $i<=$n; $i++){
-		$x=lcg_value()*2-1;
-		$y=lcg_value()*2-1;
-		//var_dump($x+''+$y);
-		if(($x**2+$y**2)<=1) {
-			$np++;
-		}
-	}
-	
+				for ($i=0; $i<=$n; $i++){
+					$x=lcg_value()*2-1;
+					$y=lcg_value()*2-1;
+		
+					if(($x**2+$y**2)<=1) {
+						$np++;
+					}
+				}
     return $np;
 };
 
